@@ -8,7 +8,6 @@ def text_count(text, words):
 
 def detect_language(text, languages=LANGUAGES):
     """Returns the detected language of given text."""
-    #loop through languages, and count, return largest counted language
     if text_count(text, LANGUAGES[0]['common_words']) > text_count(text, LANGUAGES[1]['common_words']):
         return 'Spanish'
     else:
