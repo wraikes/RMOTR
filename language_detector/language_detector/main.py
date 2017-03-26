@@ -1,19 +1,19 @@
 """This is the entry point of the program."""
 
 from .languages import LANGUAGES
+from functools import reduce
 
+def text_count(text, words):
+    return reduce(lambda x, y: x + (y in text.lower().split()), words, 0)
 
 def detect_language(text, languages=LANGUAGES):
     """Returns the detected language of given text."""
     #loop through languages, and count, return largest counted language
-    spanish_count = 0
-    german_count = 0
-    for lang in languages: 
-        if lang['name'] == 'Spanish':
-            spanish_count = sum([1 for x in lang['common_words'] if x in text.lower().split()])
-            print(spanish_count)
-        else:
-            german_count = sum([1 for x in lang['common_words'] if x in text.lower().split()])
-            print(german_count)
-    return 'Spanish' if spanish_count > german_count else 'German'
+    if text_count(text, LANGUAGES[0]['common_words']) > text_count(text, LANGUAGES[1]['common_words']):
+        return 'Spanish'
+    else:
+        return 'German'
+
+
+
 
